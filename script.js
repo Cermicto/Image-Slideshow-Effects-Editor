@@ -17,7 +17,6 @@ b = d.body
 
 slideAnimationTiming = 5
 slideAnimationDirection = 'previous'
-console.log(slideAnimationDirection)
 currentSlideImageAnimationOut = 'fadeOut'
 nextSlideImageAnimationIn = 'fadeIn'
 previousSlideImageAnimationIn = null
@@ -58,17 +57,13 @@ w.si(function() {
 		triggerAnimation()
 		resetTimerUntilAnimation()
 
-	console.log(slideAnimationDirection)
-
 	if (slideAnimationDirection == 'next') {
-		console.log('setting next image as current...')
 		if (currentImage + 1 == images.length) {
 			currentImage = 0
 		} else {
 			currentImage++
 		}
 	} else if (slideAnimationDirection == 'previous') {
-		console.log('setting previous image as current...')
 		if (currentImage - 1 < 0 ) {
 			currentImage = images.length - 1
 		} else {
@@ -85,17 +80,13 @@ function resetTimerUntilAnimation () {
 
 // Function to trigger animation and set new currentImage
 function triggerAnimation () {
-	console.log('currentImage', currentImage)
 	imageOut = d.gebi(`image${currentImage}`)
 
 	if (slideAnimationDirection == "next") {
-		if (currentImage + 1 == images.length) {
-			console.log(currentImage)
-			
+		if (currentImage + 1 == images.length) {			
 			imageIn = d.gebi(`image${currentImage}`)
 		} else {
 			imageIn = d.gebi(`image${currentImage + 1}`)
-			console.log(currentImage)
 		}
 	} else if (slideAnimationDirection == "previous") {
 		if (currentImage - 1 < 0) {
