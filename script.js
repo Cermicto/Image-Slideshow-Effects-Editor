@@ -16,7 +16,8 @@ d.qsa = d.querySelectorAll
 b = d.body
 
 slideAnimationTiming = 5
-slideAnimationDirection = 'next'
+slideAnimationDirection = 'previous'
+console.log(slideAnimationDirection)
 currentSlideImageAnimationOut = 'fadeOut'
 nextSlideImageAnimationIn = 'fadeIn'
 previousSlideImageAnimationIn = null
@@ -53,10 +54,29 @@ w.si(function() {
 
 // Set interval to check if animation timer has reached 0 or less
 w.si(function() {
-	if (timerUntilAnimation <= 0) {
+	if (timerUntilAnimation == 0) {
 		triggerAnimation()
+		resetTimerUntilAnimation()
+
+	console.log(slideAnimationDirection)
+
+	if (slideAnimationDirection == 'next') {
+		console.log('setting next image as current...')
+		if (currentImage + 1 == images.length) {
+			currentImage = 0
+		} else {
+			currentImage++
+		}
+	} else if (slideAnimationDirection == 'previous') {
+		console.log('setting previous image as current...')
+		if (currentImage - 1 < 0 ) {
+			currentImage = images.length - 1
+		} else {
+			currentImage--
+		}
 	}
-})
+	}
+}, 1000)
 
 // Function to set timerUntilAnimation to animationTimerMax
 function resetTimerUntilAnimation () {
@@ -65,13 +85,17 @@ function resetTimerUntilAnimation () {
 
 // Function to trigger animation and set new currentImage
 function triggerAnimation () {
+	console.log('currentImage', currentImage)
 	imageOut = d.gebi(`image${currentImage}`)
 
 	if (slideAnimationDirection == "next") {
-		if (currentImage + 1 > images.length) {
-			imageIn = d.gebi(`image0`)
+		if (currentImage + 1 == images.length) {
+			console.log(currentImage)
+			
+			imageIn = d.gebi(`image${currentImage}`)
 		} else {
 			imageIn = d.gebi(`image${currentImage + 1}`)
+			console.log(currentImage)
 		}
 	} else if (slideAnimationDirection == "previous") {
 		if (currentImage - 1 < 0) {
@@ -92,26 +116,4 @@ function triggerAnimation () {
 	imageIn.style.animationFillMode = animationFillMode
 	imageIn.style.animationTimingFunction = animationTimingFunction
 	imageIn.classList.remove('hidden')
-
-	if (slideAnimationDirection = 'next') {
-		console.log('setting next image as current...')
-		if (currentImage + 1 > images.length - 1) {
-			currentImage = 0
-		} else {
-			currentImage++
-		}
-	} else if (slideAnimationDirection = 'previous') {
-		console.log('setting previous image as current...')
-		if (currentImage - 1 < 0 ) {
-			currentImage = images.length - 1
-		} else {
-			currentImage--
-		}
-	}
-
-	// Resets className on image that was just animated out just after its animation duration completes
-	w.st(function() {
-		imageOut.className = 'slideshow-image hidden'
-		resetTimerUntilAnimation()
-	}, animationDuration + 0.01)
 }
