@@ -1,4 +1,4 @@
-# Image-Slideshow-Effects-Editor
+# Image-Slideshow-Effects-Editor v0.0.0.0
 An image slideshow and effects editor where you can apply various animations and special effects
 
 ## Purpose of this Project
