@@ -110,10 +110,13 @@ function triggerAnimation () {
 	imageOut.style.animationFillMode = animationFillMode
 	imageOut.style.animationTimingFunction = animationTimingFunction
 
-
 	imageIn.classList.add(animations[nextSlideImageAnimationIn].animationClass)
 	imageIn.style.animationDuration = animationDuration + 's'
 	imageIn.style.animationFillMode = animationFillMode
 	imageIn.style.animationTimingFunction = animationTimingFunction
 	imageIn.classList.remove('hidden')
+
+	w.st(function() {
+		imageOut.className = 'slideshow-image hidden'
+	}, slideAnimationDirection + 0.01)
 }
