@@ -1,4 +1,4 @@
-# Image-Slideshow-Effects-Editor v0.0.0.0
+# Image-Slideshow-Effects-Editor v0.0.1.0
 An image slideshow and effects editor where you can apply various animations and special effects
 
 ## Purpose of this Project
@@ -24,4 +24,9 @@ Here I'll provide updates on where the project is, what I want to do with it, an
 - I'd like to make it part of a web app with a node.js backend, and API calls with preloading upcoming images
 - I'd like to allow user accounts and uploading of user images to create custom slideshows they can then just download the completed saved slideshow and put it on their website
 - I'd like to integrate generative AI image collection generation through AI APIs
-- 
+
+#### Versions
+##### v0.0.0.0
+- Initial functioning slideshow
+##### v0.0.1.0
+- Added controls for slideshow direction: Forwards or Backwards
