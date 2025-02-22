@@ -136,3 +136,25 @@ playSlideshowForwardsBtn.onclick = function(e) {
 
 	}
 }
+
+// Adjust slideshow and controls positioning on window resize
+
+setLayout()
+
+function setLayout () {
+	if (getLowestDimension() == 'vh') {
+		b.className = 'landscape'
+	} else {
+		b.className = 'portrait'
+	}
+}
+
+function getLowestDimension () {
+	if (w.innerHeight < w.innerWidth) {
+		return 'vh'
+	} else {
+		return 'vw'
+	}
+}
+
+w.onresize = setLayout

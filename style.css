@@ -55,7 +55,7 @@ body {
 }
 
 .portrait #slideshowControls {
-	top: 0;
+	bottom: 0;
 	left: 0;
     height: 100%;
     width: 80px;
@@ -64,24 +64,39 @@ body {
 
 #directionControls {
     position: absolute;
-    right: 0;
-    border-left: 1px solid grey;
-    height: 100%;
-    width: 100px;
+    height: 80px;
+    width: 80px;
     text-align: center;
     color: white;
+    transition: all 1s ease-in-out;
+    border-left: 1px solid transparent;
+    border-top: 1px solid transparent;
+}
+
+.landscape #directionControls {
+	right: 0;
+	bottom: 0;
+	border-left: 1px solid #ea6917;
+}
+
+.portrait #directionControls {
+	bottom: 0;
+	right: 0;
+	border-top: 1px solid #ea6917;
 }
 
 .direction-btn {
     border: none;
     padding: 0;
-    width: 40px;
-    height: 40px;
+    width: 30px !important;
+    height: 30px;
+    line-height: 35px;
     position: absolute;
     display: block;
     background: none;
     transition: all 0.25s ease-in-out;
-    width: 40px;
+    width: 30px;
+    text-align: center;
     border: 1px solid transparent;
     border-radius: 50%;
     cursor: pointer;
@@ -97,12 +112,9 @@ body {
 	right: 7.5px;
 }
 
-.direction-btn-img {
-    width: 35px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+.direction-arrow {
+    line-height: 28px;
+    transition: all 0.25s ease-in-out;
 }
 
 .direction-btn-selected,
@@ -111,11 +123,23 @@ body {
     background: linear-gradient(90deg, #fe8c2c, transparent);
 }
 
+.direction-btn-selected .direction-arrow,
+.direction-btn:hover .direction-arrow {
+	color: white;
+}
+
 #directionControlsInfo {
     position: absolute;
     bottom: 7.5px;
     width: 100%;
     font-family: 'Oxygen', sans-serif;
+    border-top: 1px solid #ea6917;
+    padding-top: 3px;
+}
+
+#playDirectionMsg {
+    font-size: 13px;
+    letter-spacing: 1px;
 }
 
 /* Animations */
