@@ -9,3 +9,34 @@ body {
 .hidden {
 	display: none;
 }
+
+#slideshowContainer {
+    position: absolute;
+    top: 0;
+}
+
+.landscape #slideshowContainer {
+    width: 100%;
+    border-bottom: 1px solid;
+    position: absolute;
+    left: 0;
+    height: calc(100% - 80px);
+}
+
+.portrait #slideshowContainer {
+    height: 100%;
+    border-left: 1px solid;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 80px);
+}
+
+.slideshow-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    max-height: 100%;
+    max-width: 100%;
+}
