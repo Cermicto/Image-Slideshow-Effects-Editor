@@ -21,7 +21,7 @@ console.log(slideAnimationDirection)
 currentSlideImageAnimationOut = 'fadeOut'
 nextSlideImageAnimationIn = 'fadeIn'
 previousSlideImageAnimationIn = null
-animationDuration = 1
+animationDuration = 2
 animationFillMode = 'forwards'
 animationTimingFunction = 'ease-in-out'
 currentImage = 0
@@ -116,7 +116,7 @@ function triggerAnimation () {
 	imageIn.style.animationTimingFunction = animationTimingFunction
 	imageIn.classList.remove('hidden')
 
-	w.st(function() {
+	window.st(function() {
 		imageOut.className = 'slideshow-image hidden'
-	}, slideAnimationDirection + 0.01)
+	}, animationDuration * 1000)
 }
