@@ -5,6 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Slideshow & Effects Editor</title>
 	<script type="text/javascript" src="script.js" defer></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body class="landscape">
@@ -146,6 +149,15 @@
 	<div id="slideshowControls">
 		<div id="animationControls"></div>
 		<div id="effectsControls"></div>
+		<div id="directionControls">
+			<button id="playSlideshowBackwardsBtn" class="direction-btn direction-btn-left">
+				<img class="direction-btn-img" src="images/icons/arrow_back.svg">
+			</button>
+			<button id="playSlideshowForwardsBtn" class="direction-btn direction-btn-right direction-btn-selected">
+				<img class="direction-btn-img" src="images/icons/arrow_forward.svg">
+			</button>
+			<div id="directionControlsInfo"><span id="playDirectionMsg">Forwards</span></div>
+		</div>
 	</div>
 </body>
 </html>

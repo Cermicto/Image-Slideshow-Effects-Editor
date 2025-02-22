@@ -16,7 +16,7 @@ d.qsa = d.querySelectorAll
 b = d.body
 
 slideAnimationTiming = 5
-slideAnimationDirection = 'previous'
+slideAnimationDirection = 'next'
 currentSlideImageAnimationOut = 'fadeOut'
 nextSlideImageAnimationIn = 'fadeIn'
 previousSlideImageAnimationIn = null
@@ -110,4 +110,29 @@ function triggerAnimation () {
 	window.st(function() {
 		imageOut.className = 'slideshow-image hidden'
 	}, animationDuration * 1000)
+}
+
+// Slideshow play direction controls
+
+playSlideshowBackwardsBtn = d.gebi('playSlideshowBackwardsBtn')
+
+playSlideshowBackwardsBtn.onclick = function(e) {
+	if (slideAnimationDirection != 'previous') {
+		d.gebc('direction-btn-selected')[0].classList.remove('direction-btn-selected')
+		this.classList.add('direction-btn-selected')
+		slideAnimationDirection = 'previous'
+		d.gebi('playDirectionMsg').innerText = 'Backwards'
+	}
+}
+
+playSlideshowForwardsBtn = d.gebi('playSlideshowForwardsBtn')
+
+playSlideshowForwardsBtn.onclick = function(e) {
+	if (slideAnimationDirection != 'next') {
+		d.gebc('direction-btn-selected')[0].classList.remove('direction-btn-selected')
+		this.classList.add('direction-btn-selected')
+		slideAnimationDirection = 'next'
+		d.gebi('playDirectionMsg').innerText = 'Forwards'
+
+	}
 }

@@ -13,11 +13,11 @@ body {
 #slideshowContainer {
     position: absolute;
     top: 0;
+    transition: all 1s ease-in-out;
 }
 
 .landscape #slideshowContainer {
     width: 100%;
-    border-bottom: 1px solid;
     position: absolute;
     left: 0;
     height: calc(100% - 80px);
@@ -25,7 +25,6 @@ body {
 
 .portrait #slideshowContainer {
     height: 100%;
-    border-left: 1px solid;
     position: absolute;
     top: 0;
     right: 0;
@@ -40,6 +39,86 @@ body {
     max-height: 100%;
     max-width: 100%;
 }
+
+#slideshowControls {
+    position: absolute;
+    box-shadow: 0px 0px 20px 0 rgb(0,0,0,0.2);
+    transition: all 1s ease-in-out;
+}
+
+.landscape #slideshowControls {
+	bottom: 0;
+	left: 0;
+    height: 80px;
+    width: 100%;
+    background: linear-gradient(90deg, #ff8d2d, #d54500);
+}
+
+.portrait #slideshowControls {
+	top: 0;
+	left: 0;
+    height: 100%;
+    width: 80px;
+    background: linear-gradient(180deg, #ff8d2d, #d54500);
+}
+
+#directionControls {
+    position: absolute;
+    right: 0;
+    border-left: 1px solid grey;
+    height: 100%;
+    width: 100px;
+    text-align: center;
+    color: white;
+}
+
+.direction-btn {
+    border: none;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    display: block;
+    background: none;
+    transition: all 0.25s ease-in-out;
+    width: 40px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.direction-btn-left {
+	top: 7.5px;
+	left: 7.5px;
+}
+
+.direction-btn-right {
+	top: 7.5px;
+	right: 7.5px;
+}
+
+.direction-btn-img {
+    width: 35px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.direction-btn-selected,
+.direction-btn:hover {
+    border: 1px solid white;
+    background: linear-gradient(90deg, #fe8c2c, transparent);
+}
+
+#directionControlsInfo {
+    position: absolute;
+    bottom: 7.5px;
+    width: 100%;
+    font-family: 'Oxygen', sans-serif;
+}
+
+/* Animations */
 
 .fade-in {
 	animation-name: fadeIn;
