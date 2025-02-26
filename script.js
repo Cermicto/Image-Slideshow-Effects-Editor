@@ -43,6 +43,30 @@ animations = {
 	},
 	'fadeOut': {
 		animationClass: 'fade-out'
+	},
+	'slideLeftIn': {
+		animationClass: 'slide-left-in'
+	},
+	'slideLeftOut': {
+		animationClass: 'slide-left-out'
+	},
+	'slideRightIn': {
+		animationClass: 'slide-right-in'
+	},
+	'slideRightOut': {
+		animationClass: 'slide-right-out'
+	},
+	'slideDownIn': {
+		animationClass: 'slide-down-in'
+	},
+	'slideDownOut': {
+		animationClass: 'slide-down-out'
+	},
+	'slideUpIn': {
+		animationClass: 'slide-up-in'
+	},
+	'slideUpOut': {
+		animationClass: 'slide-up-out'
 	}
 }
 
@@ -188,7 +212,6 @@ function setImageFrameZIndex () {
 // Initialize image frame
 setImageFrameSize(currentImage)
 
-
 // Call on animate in/out and set to transition duration
 function setImageFrameSize (nextCurrentImage) {
 	imageFrame.style.transitionDuration = animationDuration + 's'
@@ -197,4 +220,19 @@ function setImageFrameSize (nextCurrentImage) {
 	incomingImage = d.gebi(`image${nextCurrentImage}`)
 	imageFrame.style.width = incomingImage.width + 'px'
 	imageFrame.style.height = incomingImage.height + 'px'
+}
+
+// Animation selections button actions
+
+animationControls = d.gebi('animationControls')
+slideAnimations = d.gebi('slideAnimations')
+
+animationControls.onclick = function () {
+	if (this.classList.contains('control-selected')) {
+		this.classList.remove('control-selected')
+		slideAnimations.classList.remove('animation-selection-open')
+	} else {
+		this.classList.add('control-selected')
+		slideAnimations.classList.add('animation-selection-open')
+	}
 }
