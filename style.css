@@ -28,14 +28,14 @@ body {
     transition: all 1s ease-in-out;
 }
 
-.landscape #slideshowContainer {
+.portrait #slideshowContainer {
     width: 100%;
     position: absolute;
     left: 0;
     height: calc(100% - 80px);
 }
 
-.portrait #slideshowContainer {
+.landscape #slideshowContainer {
     height: 100%;
     position: absolute;
     top: 0;
@@ -56,11 +56,10 @@ body {
 #slideshowControls {
     position: absolute;
     box-shadow: 0px 0px 20px 0 rgb(0,0,0,0.2);
-    transition: all 1s ease-in-out;
     z-index: 10;
 }
 
-.landscape #slideshowControls {
+.portrait #slideshowControls {
 	bottom: 0;
 	left: 0;
     height: 80px;
@@ -68,7 +67,7 @@ body {
     background: linear-gradient(90deg, #ff8d2d, #d54500);
 }
 
-.portrait #slideshowControls {
+.landscape #slideshowControls {
 	bottom: 0;
 	left: 0;
     height: 100%;
@@ -107,11 +106,11 @@ body {
 	animation-name: slideInDemo;
 }
 
-.landscape #animationControls {
+.portrait #animationControls {
 	border-right: 1px solid #ea6917;
 }
 
-.portrait #animationControls {
+.landscape #animationControls {
 	border-bottom: 1px solid #ea6917;
 }
 
@@ -129,7 +128,7 @@ body {
 }
 
 #slideAnimations {
-    box-shadow: 0px 0px 20px 0 rgb(0, 0, 0, 0.8);
+    box-shadow: 0px 0px 20px 0 rgb(0, 0, 0, 0.0);
     padding: 10px;
     position: absolute;
     min-width: 100px;
@@ -140,13 +139,24 @@ body {
     transition: all 0.25s ease-in-out;
 }
 
-.landscape #slideAnimations {
+.portrait #slideAnimations {
 	bottom: 80px;
 	transform: translateY(100%);
 }
 
-.landscape #slideAnimations.animation-selection-open {
+.portrait #slideAnimations.animation-selection-open {
 	transform: translateY(0px);
+	box-shadow: 0px 0px 20px 0 rgb(0, 0, 0, 0.8);
+}
+
+.landscape #slideAnimations {
+	left: 80px;
+	transform: translateX(-100%);
+}
+
+.landscape #slideAnimations.animation-selection-open {
+	transform: translateX(0px);
+	box-shadow: 0px 0px 20px 0 rgb(0, 0, 0, 0.8);
 }
 
 #transitionAnimationDemoAnimatedIcon {
@@ -229,6 +239,12 @@ body {
 	margin-left: 0px;
 }
 
+@media screen and (max-width: 271px) {
+	.animation-preview-btn:first-child {
+	    margin-left: 6px;
+	}
+}
+
 .animation-preview-btn.preview-selected,
 .animation-preview-btn:hover {
     border: 1px solid white;
@@ -271,6 +287,14 @@ body {
 	border: 1px solid white;
 }
 
+#fadeInPreviewImg {
+	background: linear-gradient(315deg, #bf00ff, #ff0000);
+}
+
+.no-border {
+	border: none;
+}
+
 .no-top-or-bottom-border {
 	border-top: none;
 	border-bottom: none;
@@ -279,6 +303,18 @@ body {
 .no-left-or-right-border {
 	border-left: none;
 	border-right: none;
+}
+
+/* Fade in/out preview */
+
+#fadeInOutPreviewImg {
+	animation: previewFadeInOut 2s infinite;
+}
+
+@keyframes previewFadeInOut {
+	0% { opacity: 1 }
+	50% { opacity: 0 }
+	100% { opacity: 1 }
 }
 
 /* Slide in from left preview */
@@ -300,6 +336,69 @@ body {
 @keyframes previewSlideInFromLeft_in {
 	0% { left: -60px; }
 	100% { left: 0px; }
+}
+
+/* Slide in from right preview */
+
+#slideInFromRight_outFrame {
+	animation: previewSlideInFromRight_out 2s infinite;
+}
+
+@keyframes previewSlideInFromRight_out {
+	0% { left: 60px; }
+	100% { left: 0px; }
+}
+
+#slideInFromRight_inFrame {
+	animation: previewSlideInFromRight_in 2s infinite;
+	border-right: none;
+}
+
+@keyframes previewSlideInFromRight_in {
+	0% { left: 0px; }
+	100% { left: -60px; }
+}
+
+/* Slide in from top preview */
+
+#slideInFromTop_outFrame {
+	animation: previewSlideInFromTop_out 2s infinite;
+}
+
+@keyframes previewSlideInFromTop_out {
+	0% { top: -40px; }
+	100% { top: 0px; }
+}
+
+#slideInFromTop_inFrame {
+	animation: previewSlideInFromTop_in 2s infinite;
+	border-top: none;
+}
+
+@keyframes previewSlideInFromTop_in {
+	0% { top: 0px; }
+	100% { top: 40px; }
+}
+
+/* Slide in from bottom preview */
+
+#slideInFromBottom_outFrame {
+	animation: previewSlideInFromBottom_out 2s infinite;
+}
+
+@keyframes previewSlideInFromBottom_out {
+	0% { top: 0px; }
+	100% { top: -40px; }
+}
+
+#slideInFromBottom_inFrame {
+	animation: previewSlideInFromBottom_in 2s infinite;
+	border-top: none;
+}
+
+@keyframes previewSlideInFromBottom_in {
+	0% { top: 40px; }
+	100% { top: 0px; }
 }
 
 /* Slideshow direction controls */
@@ -382,7 +481,7 @@ body {
     letter-spacing: 1px;
 }
 
-/* Animations */
+/* Main slideshow image animations */
 
 .fade-in {
 	animation-name: fadeIn;
@@ -407,5 +506,117 @@ body {
 	}
 	100% {
 		opacity: 0;
+	}
+}
+
+/* Slide right */
+
+.slide-right-in {
+	animation-name: slideRightIn;
+}
+
+@keyframes slideRightIn {
+	0% {
+		transform: translateX(-150%) translateY(-50%);
+	}
+	100% {
+		transform: translateX(-50%) translateY(-50%);
+	}
+}
+
+.slide-right-out {
+	animation-name: slideRightOut;
+}
+
+@keyframes slideRightOut {
+	0% {
+		transform: translateX(-50%) translateY(-50%);
+	}
+	100% {
+		transform: translateX(50%) translateY(-50%);
+	}
+}
+
+/* Slide left */
+
+.slide-left-in {
+	animation-name: slideLeftIn;
+}
+
+@keyframes slideLeftIn {
+	0% {
+		transform: translateX(50%) translateY(-50%);
+	}
+	100% {
+		transform: translateX(-50%) translateY(-50%);
+	}
+}
+
+.slide-left-out {
+	animation-name: slideLeftOut;
+}
+
+@keyframes slideLeftOut {
+	0% {
+		transform: translateX(-50%) translateY(-50%);
+	}
+	100% {
+		transform: translateX(-150%) translateY(-50%);
+	}
+}
+
+/* Slide Down */
+
+.slide-down-in {
+	animation-name: slideDownIn;
+}
+
+@keyframes slideDownIn {
+	0% {
+		transform: translateX(-50%) translateY(-150%);
+	}
+	100% {
+		transform: translateX(-50%) translateY(-50%);
+	}
+}
+
+.slide-down-out {
+	animation-name: slideDownOut;
+}
+
+@keyframes slideDownOut {
+	0% {
+		transform: translateX(-50%) translateY(-50%);
+	}
+	100% {
+		transform: translateX(-50%) translateY(50%);
+	}
+}
+
+/* Slide Up */
+
+.slide-up-in {
+	animation-name: slideUpIn;
+}
+
+@keyframes slideUpIn {
+	0% {
+		transform: translateX(-50%) translateY(50%);
+	}
+	100% {
+		transform: translateX(-50%) translateY(-50%);
+	}
+}
+
+.slide-up-out {
+	animation-name: slideUpOut;
+}
+
+@keyframes slideUpOut {
+	0% {
+		transform: translateX(-50%) translateY(-50%);
+	}
+	100% {
+		transform: translateX(-50%) translateY(-150%);
 	}
 }

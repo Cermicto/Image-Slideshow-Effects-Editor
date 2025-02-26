@@ -44,17 +44,17 @@ animations = {
 	'fadeOut': {
 		animationClass: 'fade-out'
 	},
-	'slideLeftIn': {
-		animationClass: 'slide-left-in'
-	},
-	'slideLeftOut': {
-		animationClass: 'slide-left-out'
-	},
 	'slideRightIn': {
 		animationClass: 'slide-right-in'
 	},
 	'slideRightOut': {
 		animationClass: 'slide-right-out'
+	},
+	'slideLeftIn': {
+		animationClass: 'slide-left-in'
+	},
+	'slideLeftOut': {
+		animationClass: 'slide-left-out'
 	},
 	'slideDownIn': {
 		animationClass: 'slide-down-in'
@@ -124,8 +124,8 @@ function triggerAnimation () {
 
 	imageOut.classList.add(animations[currentSlideImageAnimationOut].animationClass)
 	imageOut.style.animationDuration = animationDuration + 's'
-	imageOut.style.animationFillMode = animationFillMode
 	imageOut.style.animationTimingFunction = animationTimingFunction
+	imageOut.style.animationFillMode = animationFillMode
 
 	imageIn.classList.add(animations[nextSlideImageAnimationIn].animationClass)
 	imageIn.style.animationDuration = animationDuration + 's'
@@ -189,17 +189,19 @@ imageTransitionContext = '2d'
 
 imageFrame = d.gebi('imageFrame')
 
-// Image frame overlay (for 2D transitions) or underlay (for 3D image transforms)
-// I know, this method is different that just putting the slideshow images in a container
-//  with overflow being hidden. Just trying it out for now. It's basically just setting a 
-//  transparent div over the size of the current image space with an outline that will have 
-//  a z-index higher than the images transitioning in 2D so the incoming and outgoing image
-//  look like they are staying within the frame, and then during 3D transitions will have a 
-//  z-index lower than the images transforming in 3D since they will go outside the image frame
-//  space anyway. I'm thinking that by putting a transition on the frame after it's new size for
-//  the incoming image is might have an interesting effect on how different size images replace
-//  each other as well. Always a new way to do something! I loved the challenge on Codepen around
-//  a decade ago that was asking people all the different ways to make a blue box.... hundreds...
+/* 
+	Image frame overlay (for 2D transitions) or underlay (for 3D image transforms)
+	I know, this method is different that just putting the slideshow images in a container
+	with overflow being hidden. Just trying it out for now. It's basically just setting a 
+	transparent div over the size of the current image space with an outline that will have 
+	a z-index higher than the images transitioning in 2D so the incoming and outgoing image
+	look like they are staying within the frame, and then during 3D transitions will have a 
+	z-index lower than the images transforming in 3D since they will go outside the image frame
+	space anyway. I'm thinking that by putting a transition on the frame after it's new size for
+	the incoming image is might have an interesting effect on how different size images replace
+	each other as well. Always a new way to do something! I loved the challenge on Codepen around
+	a decade ago that was asking people all the different ways to make a blue box.... hundreds...
+*/
 
 function setImageFrameZIndex () {
 	if(imageTransitionContext == '2d') {
@@ -209,10 +211,12 @@ function setImageFrameZIndex () {
 	}
 }
 
-// Initialize image frame
+// Initialize image frame on window load
+
 setImageFrameSize(currentImage)
 
 // Call on animate in/out and set to transition duration
+
 function setImageFrameSize (nextCurrentImage) {
 	imageFrame.style.transitionDuration = animationDuration + 's'
 
@@ -234,5 +238,23 @@ animationControls.onclick = function () {
 	} else {
 		this.classList.add('control-selected')
 		slideAnimations.classList.add('animation-selection-open')
+	}
+}
+
+// Animation preview button actions
+
+animationPreviewBtns = d.gebc('animation-preview-btn')
+
+for (var i = 0; i < animationPreviewBtns.length; i++) {
+	animationPreviewBtns[i].onclick = function () {
+		mainAnimationName = this.getAttribute('mainanimationname')
+
+		nextSlideImageAnimationIn = mainAnimationName + 'In'
+		currentSlideImageAnimationOut = mainAnimationName + 'Out'
+
+		if (!this.classList.contains('preview-selected')) {
+			d.gebc('preview-selected')[0].classList.remove('preview-selected')
+			this.classList.add('preview-selected')
+		}
 	}
 }
