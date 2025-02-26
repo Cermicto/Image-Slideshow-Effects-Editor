@@ -13,6 +13,7 @@
 </head>
 <body class="landscape">
 	<div id="slideshowContainer">
+		<div id="imageFrame"></div>
 		<img class="slideshow-image" src="images/robot-alien-0.jpg">
 		<img class="slideshow-image hidden" src="images/robot-alien-1.jpg">
 		<img class="slideshow-image hidden" src="images/robot-alien-2.jpg">
@@ -148,7 +149,34 @@
 		<img class="slideshow-image hidden" src="images/robot-alien-132.jpg">
 	</div>
 	<div id="slideshowControls">
-		<div id="animationControls"></div>
+		<div id="animationControls">
+			<div id="transitionAnimationDemoAnimatedIcon">
+				<div id="fadeInOutDemoImagePlaceholder" class="demo-animation-image-placeholder"></div>
+				<div id="slideOutDemoImagePlaceholder" class="demo-animation-image-placeholder"></div>
+				<div id="slideInDemoImagePlaceholder" class="demo-animation-image-placeholder"></div>
+			</div>
+			<div id="animationsControlsInfo">Animations</div>
+		</div>
+
+		<div id="slideAnimations">
+			<div id="slideInFromLeft" class="animation-preview-btn">
+				<div id="slideInFromLeft_outFrame"></div>
+				<div id="slideInFromLeft_inFrame"></div>
+			</div>
+			<div id="slideInFromRight" class="animation-preview-btn">
+				<div id="slideInFromRight_outFrame"></div>
+				<div id="slideInFromRight_inFrame"></div>
+			</div>
+			<div id="slideInFromTop" class="animation-preview-btn">
+				<div id="slideInFromTop_outFrame"></div>
+				<div id="slideInFromTop_inFrame"></div>
+			</div>
+			<div id="slideInFromBottom" class="animation-preview-btn">
+				<div id="slideInFromBottom_outFrame"></div>
+				<div id="slideInFromBottom_inFrame"></div>
+			</div>
+		</div>
+
 		<div id="effectsControls"></div>
 		<div id="directionControls">
 			<button id="playSlideshowBackwardsBtn" class="direction-btn direction-btn-left">

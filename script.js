@@ -57,19 +57,21 @@ w.si(function() {
 		triggerAnimation()
 		resetTimerUntilAnimation()
 
-	if (slideAnimationDirection == 'next') {
-		if (currentImage + 1 == images.length) {
-			currentImage = 0
-		} else {
-			currentImage++
+		if (slideAnimationDirection == 'next') {
+			if (currentImage + 1 == images.length) {
+				currentImage = 0
+			} else {
+				currentImage++
+			}
+		} else if (slideAnimationDirection == 'previous') {
+			if (currentImage - 1 < 0 ) {
+				currentImage = images.length - 1
+			} else {
+				currentImage--
+			}
 		}
-	} else if (slideAnimationDirection == 'previous') {
-		if (currentImage - 1 < 0 ) {
-			currentImage = images.length - 1
-		} else {
-			currentImage--
-		}
-	}
+
+		setImageFrameSize(currentImage)
 	}
 }, 1000)
 
@@ -158,3 +160,41 @@ function getLowestDimension () {
 }
 
 w.onresize = setLayout
+
+imageTransitionContext = '2d'
+
+imageFrame = d.gebi('imageFrame')
+
+// Image frame overlay (for 2D transitions) or underlay (for 3D image transforms)
+// I know, this method is different that just putting the slideshow images in a container
+//  with overflow being hidden. Just trying it out for now. It's basically just setting a 
+//  transparent div over the size of the current image space with an outline that will have 
+//  a z-index higher than the images transitioning in 2D so the incoming and outgoing image
+//  look like they are staying within the frame, and then during 3D transitions will have a 
+//  z-index lower than the images transforming in 3D since they will go outside the image frame
+//  space anyway. I'm thinking that by putting a transition on the frame after it's new size for
+//  the incoming image is might have an interesting effect on how different size images replace
+//  each other as well. Always a new way to do something! I loved the challenge on Codepen around
+//  a decade ago that was asking people all the different ways to make a blue box.... hundreds...
+
+function setImageFrameZIndex () {
+	if(imageTransitionContext == '2d') {
+		imageFrame.style.zIndex = 5
+	} else {
+		imageFrame.style.index = -1
+	}
+}
+
+// Initialize image frame
+setImageFrameSize(currentImage)
+
+
+// Call on animate in/out and set to transition duration
+function setImageFrameSize (nextCurrentImage) {
+	imageFrame.style.transitionDuration = animationDuration + 's'
+
+	// Set image frame to next image in slideshow dimensions
+	incomingImage = d.gebi(`image${nextCurrentImage}`)
+	imageFrame.style.width = incomingImage.width + 'px'
+	imageFrame.style.height = incomingImage.height + 'px'
+}

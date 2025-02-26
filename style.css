@@ -10,6 +10,17 @@ body {
 	display: none;
 }
 
+#imageFrame {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	z-index: 1;
+	outline: 500px solid white;
+	transition-timing-function: ease-in-out;
+	transition-property: all;
+}
+
 #slideshowContainer {
     position: absolute;
     top: 0;
@@ -38,12 +49,14 @@ body {
     transform: translateX(-50%) translateY(-50%);
     max-height: 100%;
     max-width: 100%;
+    z-index: 0;
 }
 
 #slideshowControls {
     position: absolute;
     box-shadow: 0px 0px 20px 0 rgb(0,0,0,0.2);
     transition: all 1s ease-in-out;
+    z-index: 10;
 }
 
 .landscape #slideshowControls {
@@ -62,6 +75,102 @@ body {
     background: linear-gradient(180deg, #ff8d2d, #d54500);
 }
 
+#animationControls {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: 0;
+    left: 0;
+    transition: all 1s ease-in-out;
+}
+
+.landscape #animationControls {
+	border-right: 1px solid #ea6917;
+}
+
+.portrait #animationControls {
+	border-bottom: 1px solid #ea6917;
+}
+
+#animationsControlsInfo {
+    position: absolute;
+    bottom: 5.5px;
+    width: 100%;
+    font-family: 'Oxygen', sans-serif;
+    border-top: 1px solid #ea6917;
+    padding-top: 5px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: white;
+    text-align: center;
+}
+
+#transitionAnimationDemoAnimatedIcon {
+	position: absolute;
+	top: 8px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 60px;
+	height: 40px;
+	border: 1px solid white;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.demo-animation-image-placeholder {
+	position: absolute;
+	background: linear-gradient(45deg, #bf00ff, #ff0000);
+	width: 100%;
+	height: 100%;
+}
+
+#fadeInOutDemoImagePlaceholder {
+	animation-name: fadeInOutDemo;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes fadeInOutDemo {
+	0% { opacity: 1; }
+	25% { opacity: 0; }
+	50% { opacity: 1; }
+	50.1% { opacity: 0; }
+	100% { opacity: 0; }
+}
+
+#slideOutDemoImagePlaceholder {
+	animation-name: slideOutDemo;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes slideOutDemo {
+	0% { opacity: 0; left: 0px; }
+	25% { opacity: 0; left: 0px; }
+	50% { opacity: 1; left: 0px; }
+	50.1% { opacity: 1; left: 0px; }
+	75% { opacity: 1; left: -60px; }
+	100% { opacity: 1; left: 0px; }
+}
+
+#slideInDemoImagePlaceholder {
+	animation-name: slideInDemo;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+}
+
+@keyframes slideInDemo {
+	0% { opacity: 0; left: 0px; }
+	25% { opacity: 0; left: 0px; }
+	50% { opacity: 1; left: 0px; }
+	50.1% { opacity: 1; left: 60px; }
+	75% { opacity: 1; left: 0px; }
+	100% { opacity: 1; left: 60px; }
+}
+
 #directionControls {
     position: absolute;
     height: 80px;
@@ -71,17 +180,15 @@ body {
     transition: all 1s ease-in-out;
     border-left: 1px solid transparent;
     border-top: 1px solid transparent;
+	right: 0;
+	bottom: 0;
 }
 
 .landscape #directionControls {
-	right: 0;
-	bottom: 0;
 	border-left: 1px solid #ea6917;
 }
 
 .portrait #directionControls {
-	bottom: 0;
-	right: 0;
 	border-top: 1px solid #ea6917;
 }
 
@@ -130,15 +237,15 @@ body {
 
 #directionControlsInfo {
     position: absolute;
-    bottom: 7.5px;
+    bottom: 5.5px;
     width: 100%;
     font-family: 'Oxygen', sans-serif;
     border-top: 1px solid #ea6917;
-    padding-top: 3px;
+    padding-top: 2px;
 }
 
 #playDirectionMsg {
-    font-size: 13px;
+    font-size: 12px;
     letter-spacing: 1px;
 }
 
