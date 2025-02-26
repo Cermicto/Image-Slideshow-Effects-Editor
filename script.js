@@ -26,18 +26,22 @@ animationTimingFunction = 'ease-in-out'
 currentImage = 0
 animationTimerMax = 5
 timerUntilAnimation = animationTimerMax
+isDragging = false
+startX = 0
+currentX = 0
 
 // Set array of images to images array
 images = d.gebc('slideshow-image')
 totalImages = images.length
 
-// Add IDs to images
+// Add IDs to images and mouse events
 for (var i = 0; i < images.length; i++) {
-	images[i].id = `image${i}`
+    images[i].id = `image${i}`
 }
 
 // Create animations object for referencing classes containing animations
 animations = {
+
 	'fadeIn': {
 		animationClass: 'fade-in'
 	},
@@ -72,70 +76,79 @@ animations = {
 
 // Set interval to decrement timerUntilAnimation by 1 every second
 w.si(function() {
-	timerUntilAnimation--
+    if (!isDragging) {
+        timerUntilAnimation--
+    }
 }, 1000)
 
 // Set interval to check if animation timer has reached 0 or less
 w.si(function() {
-	if (timerUntilAnimation == 0) {
-		triggerAnimation()
-		resetTimerUntilAnimation()
+    if (timerUntilAnimation == 0 && !isDragging) {
+        triggerAnimation()
+        resetTimerUntilAnimation()
 
-		if (slideAnimationDirection == 'next') {
-			if (currentImage + 1 == images.length) {
-				currentImage = 0
-			} else {
-				currentImage++
-			}
-		} else if (slideAnimationDirection == 'previous') {
-			if (currentImage - 1 < 0 ) {
-				currentImage = images.length - 1
-			} else {
-				currentImage--
-			}
-		}
+        if (slideAnimationDirection == 'next') {
+            if (currentImage + 1 == images.length) {
+                currentImage = 0
+            } else {
+                currentImage++
+            }
+        } else if (slideAnimationDirection == 'previous') {
+            if (currentImage - 1 < 0 ) {
+                currentImage = images.length - 1
+            } else {
+                currentImage--
+            }
+        }
 
-		setImageFrameSize(currentImage)
-	}
+        setImageFrameSize(currentImage)
+    }
 }, 1000)
 
 // Function to set timerUntilAnimation to animationTimerMax
 function resetTimerUntilAnimation () {
-	timerUntilAnimation = animationTimerMax
+    timerUntilAnimation = animationTimerMax
 }
 
 // Function to trigger animation and set new currentImage
 function triggerAnimation () {
-	imageOut = d.gebi(`image${currentImage}`)
+    imageOut = d.gebi(`image${currentImage}`)
 
-	if (slideAnimationDirection == "next") {
-		if (currentImage + 1 == images.length) {			
-			imageIn = d.gebi(`image${currentImage}`)
-		} else {
-			imageIn = d.gebi(`image${currentImage + 1}`)
-		}
-	} else if (slideAnimationDirection == "previous") {
-		if (currentImage - 1 < 0) {
-			imageIn = d.gebi(`image${images.length - 1}`)
-		} else {
-			imageIn = d.gebi(`image${currentImage - 1}`)
-		}
-	}
+    if (slideAnimationDirection == "next") {
+        if (currentImage + 1 == images.length) {            
+            imageIn = d.gebi(`image${currentImage}`)
+        } else {
+            imageIn = d.gebi(`image${currentImage + 1}`)
+        }
+    } else if (slideAnimationDirection == "previous") {
+        if (currentImage - 1 < 0) {
+            imageIn = d.gebi(`image${images.length - 1}`)
+        } else {
+            imageIn = d.gebi(`image${currentImage - 1}`)
+        }
+    }
+
 
 	imageOut.classList.add(animations[currentSlideImageAnimationOut].animationClass)
 	imageOut.style.animationDuration = animationDuration + 's'
 	imageOut.style.animationTimingFunction = animationTimingFunction
 	imageOut.style.animationFillMode = animationFillMode
 
-	imageIn.classList.add(animations[nextSlideImageAnimationIn].animationClass)
-	imageIn.style.animationDuration = animationDuration + 's'
-	imageIn.style.animationFillMode = animationFillMode
-	imageIn.style.animationTimingFunction = animationTimingFunction
-	imageIn.classList.remove('hidden')
+    imageOut.classList.add(animations[currentSlideImageAnimationOut].animationClass)
+    imageOut.style.animationDuration = animationDuration + 's'
+    imageOut.style.animationFillMode = animationFillMode
+    imageOut.style.animationTimingFunction = animationTimingFunction
 
-	window.st(function() {
-		imageOut.className = 'slideshow-image hidden'
-	}, animationDuration * 1000)
+
+    imageIn.classList.add(animations[nextSlideImageAnimationIn].animationClass)
+    imageIn.style.animationDuration = animationDuration + 's'
+    imageIn.style.animationFillMode = animationFillMode
+    imageIn.style.animationTimingFunction = animationTimingFunction
+    imageIn.classList.remove('hidden')
+
+    window.st(function() {
+        imageOut.className = 'slideshow-image hidden'
+    }, animationDuration * 1000)
 }
 
 // Slideshow play direction controls
@@ -143,24 +156,24 @@ function triggerAnimation () {
 playSlideshowBackwardsBtn = d.gebi('playSlideshowBackwardsBtn')
 
 playSlideshowBackwardsBtn.onclick = function(e) {
-	if (slideAnimationDirection != 'previous') {
-		d.gebc('direction-btn-selected')[0].classList.remove('direction-btn-selected')
-		this.classList.add('direction-btn-selected')
-		slideAnimationDirection = 'previous'
-		d.gebi('playDirectionMsg').innerText = 'Backwards'
-	}
+    if (slideAnimationDirection != 'previous') {
+        d.gebc('direction-btn-selected')[0].classList.remove('direction-btn-selected')
+        this.classList.add('direction-btn-selected')
+        slideAnimationDirection = 'previous'
+        d.gebi('playDirectionMsg').innerText = 'Backwards'
+    }
 }
 
 playSlideshowForwardsBtn = d.gebi('playSlideshowForwardsBtn')
 
 playSlideshowForwardsBtn.onclick = function(e) {
-	if (slideAnimationDirection != 'next') {
-		d.gebc('direction-btn-selected')[0].classList.remove('direction-btn-selected')
-		this.classList.add('direction-btn-selected')
-		slideAnimationDirection = 'next'
-		d.gebi('playDirectionMsg').innerText = 'Forwards'
+    if (slideAnimationDirection != 'next') {
+        d.gebc('direction-btn-selected')[0].classList.remove('direction-btn-selected')
+        this.classList.add('direction-btn-selected')
+        slideAnimationDirection = 'next'
+        d.gebi('playDirectionMsg').innerText = 'Forwards'
 
-	}
+    }
 }
 
 // Adjust slideshow and controls positioning on window resize
@@ -168,19 +181,19 @@ playSlideshowForwardsBtn.onclick = function(e) {
 setLayout()
 
 function setLayout () {
-	if (getLowestDimension() == 'vh') {
-		b.className = 'landscape'
-	} else {
-		b.className = 'portrait'
-	}
+    if (getLowestDimension() == 'vh') {
+        b.className = 'landscape'
+    } else {
+        b.className = 'portrait'
+    }
 }
 
 function getLowestDimension () {
-	if (w.innerHeight < w.innerWidth) {
-		return 'vh'
-	} else {
-		return 'vw'
-	}
+    if (w.innerHeight < w.innerWidth) {
+        return 'vh'
+    } else {
+        return 'vw'
+    }
 }
 
 w.onresize = setLayout
@@ -188,6 +201,7 @@ w.onresize = setLayout
 imageTransitionContext = '2d'
 
 imageFrame = d.gebi('imageFrame')
+
 
 /* 
 	Image frame overlay (for 2D transitions) or underlay (for 3D image transforms)
@@ -204,11 +218,11 @@ imageFrame = d.gebi('imageFrame')
 */
 
 function setImageFrameZIndex () {
-	if(imageTransitionContext == '2d') {
-		imageFrame.style.zIndex = 5
-	} else {
-		imageFrame.style.index = -1
-	}
+    if(imageTransitionContext == '2d') {
+        imageFrame.style.zIndex = 5
+    } else {
+        imageFrame.style.index = -1
+    }
 }
 
 // Initialize image frame on window load
@@ -218,7 +232,7 @@ setImageFrameSize(currentImage)
 // Call on animate in/out and set to transition duration
 
 function setImageFrameSize (nextCurrentImage) {
-	imageFrame.style.transitionDuration = animationDuration + 's'
+    imageFrame.style.transitionDuration = animationDuration + 's'
 
 	// Set image frame to next image in slideshow dimensions
 	incomingImage = d.gebi(`image${nextCurrentImage}`)
