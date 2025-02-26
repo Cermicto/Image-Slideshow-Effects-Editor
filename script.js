@@ -105,6 +105,7 @@ w.si(function() {
     }
 }, 1000)
 
+
 // Function to set timerUntilAnimation to animationTimerMax
 function resetTimerUntilAnimation () {
     timerUntilAnimation = animationTimerMax
