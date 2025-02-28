@@ -245,7 +245,7 @@ body {
 	}
 }
 
-.animation-preview-btn.preview-selected,
+.animation-preview-btn.animation-preview-selected,
 .animation-preview-btn:hover {
     border: 1px solid white;
     background: rgba(0,0,0,0.5);
@@ -401,6 +401,42 @@ body {
 	100% { top: 0px; }
 }
 
+/* Slideshow effects controls */
+
+.landscape #effectsControls {
+    border-bottom: 1px solid #ea6917;
+    border-top: 1px solid #ea6917;
+    top: 100px;
+}
+
+.portrait #effectsControls {
+    border-left: 1px solid #ea6917;
+    border-right: 1px solid #ea6917;
+    left: 100px;
+}
+
+#effectsControls {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: 0;
+    left: 0;
+    transition: all 1s ease-in-out;
+    cursor: pointer;
+}
+
+#effectsControls.control-selected, #effectsControls:hover {
+    background: linear-gradient(45deg, #d64701, #fc8729);
+}
+
+#effectsBtnPreviewImg {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid white;
+}
+
 /* Slideshow direction controls */
 
 #directionControls {
@@ -416,11 +452,11 @@ body {
 	bottom: 0;
 }
 
-.landscape #directionControls {
+.portrait #directionControls {
 	border-left: 1px solid #ea6917;
 }
 
-.portrait #directionControls {
+.landscape #directionControls {
 	border-top: 1px solid #ea6917;
 }
 

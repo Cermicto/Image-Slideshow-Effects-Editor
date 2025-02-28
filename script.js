@@ -26,9 +26,6 @@ animationTimingFunction = 'ease-in-out'
 currentImage = 0
 animationTimerMax = 5
 timerUntilAnimation = animationTimerMax
-isDragging = false
-startX = 0
-currentX = 0
 
 // Set array of images to images array
 images = d.gebc('slideshow-image')
@@ -76,14 +73,12 @@ animations = {
 
 // Set interval to decrement timerUntilAnimation by 1 every second
 w.si(function() {
-    if (!isDragging) {
         timerUntilAnimation--
-    }
 }, 1000)
 
 // Set interval to check if animation timer has reached 0 or less
 w.si(function() {
-    if (timerUntilAnimation == 0 && !isDragging) {
+    if (timerUntilAnimation == 0) {
         triggerAnimation()
         resetTimerUntilAnimation()
 
@@ -267,9 +262,23 @@ for (var i = 0; i < animationPreviewBtns.length; i++) {
 		nextSlideImageAnimationIn = mainAnimationName + 'In'
 		currentSlideImageAnimationOut = mainAnimationName + 'Out'
 
-		if (!this.classList.contains('preview-selected')) {
-			d.gebc('preview-selected')[0].classList.remove('preview-selected')
-			this.classList.add('preview-selected')
+		if (!this.classList.contains('animation-preview-selected')) {
+			d.gebc('animation-preview-selected')[0].classList.remove('animation-preview-selected')
+			this.classList.add('animation-preview-selected')
 		}
+	}
+}
+
+// Hide pull-out panels on image frame click
+
+imageFrame = d.gebi('imageFrame')
+
+imageFrame.onclick = function () {
+	var slideAnimationsPullout = d.gebi('slideAnimations')
+	var animationControls = d.gebi('animationControls')
+
+	if (slideAnimationsPullout.classList.contains('animation-selection-open')) {
+		slideAnimationsPullout.classList.remove('animation-selection-open')
+		animationControls.classList.remove('control-selected')
 	}
 }
