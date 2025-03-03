@@ -130,7 +130,7 @@ body {
 
 #slideAnimations {
     box-shadow: 0px 0px 20px 0 rgb(0, 0, 0, 0.0);
-    padding: 10px;
+    padding: 10px 16px 10px 10px;
     position: absolute;
     min-width: 100px;
     min-height: 100px;
@@ -234,16 +234,6 @@ body {
     margin-left: 6px;
     cursor: pointer;
     transition: all 0.25s ease-in-out;
-}
-
-.animation-preview-btn:first-child {
-	margin-left: 0px;
-}
-
-@media screen and (max-width: 271px) {
-	.animation-preview-btn:first-child {
-	    margin-left: 6px;
-	}
 }
 
 .animation-preview-btn.animation-preview-selected,
@@ -664,7 +654,7 @@ body {
 
 #slideEffects {
     box-shadow: 0px 0px 20px 0 rgb(0, 0, 0, 0.0);
-    padding: 10px;
+    padding: 10px 16px 10px 10px;
     position: absolute;
     min-width: 100px;
     min-height: 100px;
