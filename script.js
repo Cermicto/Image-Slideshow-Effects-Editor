@@ -15,6 +15,7 @@ d.qsa = d.querySelectorAll
 // Cache document body
 b = d.body
 
+//Animation variables
 slideAnimationTiming = 5
 slideAnimationDirection = 'next'
 currentSlideImageAnimationOut = 'fadeOut'
@@ -26,6 +27,11 @@ animationTimingFunction = 'ease-in-out'
 currentImage = 0
 animationTimerMax = 5
 timerUntilAnimation = animationTimerMax
+
+// Effects variables
+
+mainEffectName = null
+effectIsActive = false
 
 // Set array of images to images array
 images = d.gebc('slideshow-image')
@@ -135,6 +141,10 @@ function triggerAnimation () {
     imageOut.style.animationFillMode = animationFillMode
     imageOut.style.animationTimingFunction = animationTimingFunction
 
+
+    if (effectIsActive) {
+    	imageIn.classList.add(`${mainEffectName}100`)
+    }
 
     imageIn.classList.add(animations[nextSlideImageAnimationIn].animationClass)
     imageIn.style.animationDuration = animationDuration + 's'
@@ -248,6 +258,25 @@ animationControls.onclick = function () {
 	} else {
 		this.classList.add('control-selected')
 		slideAnimations.classList.add('animation-selection-open')
+		d.gebi('effectsControls').classList.remove('effects-control-selected')
+		d.gebi('slideEffects').classList.remove('effects-selection-open')
+	}
+}
+
+// #ffects selections button actions
+
+effectsControls = d.gebi('effectsControls')
+slideEffects = d.gebi('slideEffects')
+
+effectsControls.onclick = function () {
+	if (this.classList.contains('effects-control-selected')) {
+		this.classList.remove('effects-control-selected')
+		slideEffects.classList.remove('effects-selection-open')
+	} else {
+		this.classList.add('effects-control-selected')
+		slideEffects.classList.add('effects-selection-open')
+		d.gebi('animationControls').classList.remove('control-selected')
+		d.gebi('slideAnimations').classList.remove('animation-selection-open')
 	}
 }
 
@@ -257,14 +286,42 @@ animationPreviewBtns = d.gebc('animation-preview-btn')
 
 for (var i = 0; i < animationPreviewBtns.length; i++) {
 	animationPreviewBtns[i].onclick = function () {
-		mainAnimationName = this.getAttribute('mainanimationname')
-
-		nextSlideImageAnimationIn = mainAnimationName + 'In'
-		currentSlideImageAnimationOut = mainAnimationName + 'Out'
-
 		if (!this.classList.contains('animation-preview-selected')) {
+			mainAnimationName = this.getAttribute('mainanimationname')
+
+			nextSlideImageAnimationIn = mainAnimationName + 'In'
+			currentSlideImageAnimationOut = mainAnimationName + 'Out'
+
 			d.gebc('animation-preview-selected')[0].classList.remove('animation-preview-selected')
 			this.classList.add('animation-preview-selected')
+		}
+	}
+}
+
+// #Effects preview button actions
+
+effectPreviewBtns = d.gebc('effect-preview-btn')
+
+for (var i = 0; i < effectPreviewBtns.length; i++) {
+	effectPreviewBtns[i].onclick = function() {
+		currentEffectName = mainEffectName
+		mainEffectName = this.getAttribute('maineffectname')
+
+		if (!effectIsActive) {
+			this.classList.add('effect-preview-selected')
+			d.gebi(`image${currentImage}`).classList.add(`${mainEffectName}100`)
+			effectIsActive = true
+		} else {
+			if (this.classList.contains('effect-preview-selected')) {
+				this.classList.remove('effect-preview-selected')
+				d.gebi(`image${currentImage}`).classList.remove(`${mainEffectName}100`)
+				effectIsActive = false
+			} else {
+				d.gebc('effect-preview-selected')[0].classList.remove('effect-preview-selected')
+				this.classList.add('effect-preview-selected')
+				d.gebi(`image${currentImage}`).classList.remove(`${currentEffectName}100`)
+				d.gebi(`image${currentImage}`).classList.add(`${mainEffectName}100`)
+			}
 		}
 	}
 }
