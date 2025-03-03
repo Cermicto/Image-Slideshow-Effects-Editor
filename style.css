@@ -684,6 +684,17 @@ body {
     box-shadow: 0px 0px 20px 0 rgb(0, 0, 0, 0.8);
 }
 
+.portrait #slideEffects {
+	bottom: 80px;
+    left: 100px;
+    transform: translateY(100%);
+}
+
+.portrait #slideEffects.effects-selection-open {
+    transform: translateY(0px);
+    box-shadow: 0px 0px 20px 0 rgb(0, 0, 0, 0.8);
+}
+
 .effect-preview-btn {
     position: relative;
     width: 80px;

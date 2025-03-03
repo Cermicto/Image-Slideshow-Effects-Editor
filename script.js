@@ -1,9 +1,9 @@
-// Cache window and commonly used window function
+// Cache window and commonly used window functions
 w = window
 w.st = w.setTimeout
 w.si = w.setInterval
 
-// Cache document and commonly used DOM element function
+// Cache document and commonly used DOM element selectors
 d = document
 d.ce = d.createElement
 d.gebi = d.getElementById
@@ -29,7 +29,6 @@ animationTimerMax = 5
 timerUntilAnimation = animationTimerMax
 
 // Effects variables
-
 mainEffectName = null
 effectIsActive = false
 
@@ -158,7 +157,6 @@ function triggerAnimation () {
 }
 
 // Slideshow play direction controls
-
 playSlideshowBackwardsBtn = d.gebi('playSlideshowBackwardsBtn')
 
 playSlideshowBackwardsBtn.onclick = function(e) {
@@ -184,6 +182,7 @@ playSlideshowForwardsBtn.onclick = function(e) {
 
 // Adjust slideshow and controls positioning on window resize
 
+// Initialize controls on load
 setLayout()
 
 function setLayout () {
@@ -202,12 +201,8 @@ function getLowestDimension () {
     }
 }
 
+// Reset control positions if window geometry changes to/from portrait/landscape orientation
 w.onresize = setLayout
-
-imageTransitionContext = '2d'
-
-imageFrame = d.gebi('imageFrame')
-
 
 /* 
 	Image frame overlay (for 2D transitions) or underlay (for 3D image transforms)
@@ -223,6 +218,9 @@ imageFrame = d.gebi('imageFrame')
 	a decade ago that was asking people all the different ways to make a blue box.... hundreds...
 */
 
+imageTransitionContext = '2d'
+imageFrame = d.gebi('imageFrame')
+
 function setImageFrameZIndex () {
     if(imageTransitionContext == '2d') {
         imageFrame.style.zIndex = 5
@@ -232,11 +230,9 @@ function setImageFrameZIndex () {
 }
 
 // Initialize image frame on window load
-
 setImageFrameSize(currentImage)
 
 // Call on animate in/out and set to transition duration
-
 function setImageFrameSize (nextCurrentImage) {
     imageFrame.style.transitionDuration = animationDuration + 's'
 
@@ -247,7 +243,6 @@ function setImageFrameSize (nextCurrentImage) {
 }
 
 // Animation selections button actions
-
 animationControls = d.gebi('animationControls')
 slideAnimations = d.gebi('slideAnimations')
 
@@ -263,7 +258,7 @@ animationControls.onclick = function () {
 	}
 }
 
-// #ffects selections button actions
+// #Effects selections button actions
 
 effectsControls = d.gebi('effectsControls')
 slideEffects = d.gebi('slideEffects')
@@ -281,7 +276,6 @@ effectsControls.onclick = function () {
 }
 
 // Animation preview button actions
-
 animationPreviewBtns = d.gebc('animation-preview-btn')
 
 for (var i = 0; i < animationPreviewBtns.length; i++) {
@@ -299,7 +293,6 @@ for (var i = 0; i < animationPreviewBtns.length; i++) {
 }
 
 // #Effects preview button actions
-
 effectPreviewBtns = d.gebc('effect-preview-btn')
 
 for (var i = 0; i < effectPreviewBtns.length; i++) {
@@ -327,7 +320,6 @@ for (var i = 0; i < effectPreviewBtns.length; i++) {
 }
 
 // Hide pull-out panels on image frame click
-
 imageFrame = d.gebi('imageFrame')
 
 imageFrame.onclick = function () {
