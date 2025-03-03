@@ -1,4 +1,4 @@
-# Image-Slideshow-Effects-Editor v0.0.3.0
+# Image-Slideshow-Effects-Editor v0.0.3.1
 An image slideshow and effects editor where you can apply various animations and special effects
 
 ## Purpose of this Project
@@ -28,6 +28,8 @@ Here I'll provide updates on where the project is, what I want to do with it, an
 #### Versions
 ##### v0.0.3.0
 - Added image effects selections feature: Grayscale, sepia, and invert.
+ ###### v0.0.3.1 Patch
+ - Fixed Effects selection positioning in portrait mode
 ##### v0.0.2.0
 - Added slideshow transition animation selections feature: Fade in/out, slide right, slide left, slide down, and slide up.
 ##### v0.0.1.0
