@@ -323,11 +323,19 @@ for (var i = 0; i < effectPreviewBtns.length; i++) {
 imageFrame = d.gebi('imageFrame')
 
 imageFrame.onclick = function () {
+	console.log('imageFrame clicked...')
 	var slideAnimationsPullout = d.gebi('slideAnimations')
 	var animationControls = d.gebi('animationControls')
+	var effectSelectionsPullout = d.gebi('slideEffects')
+	var effectsControls = d.gebi('effectsControls')
 
 	if (slideAnimationsPullout.classList.contains('animation-selection-open')) {
 		slideAnimationsPullout.classList.remove('animation-selection-open')
 		animationControls.classList.remove('control-selected')
+	}
+
+	if (effectSelectionsPullout.classList.contains('effects-selection-open')) {
+		effectSelectionsPullout.classList.remove('effects-selection-open')
+		effectsControls.classList.remove('effects-control-selected')
 	}
 }

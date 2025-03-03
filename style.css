@@ -89,6 +89,7 @@ body {
 
 #animationControls.control-selected, #animationControls:hover {
     background: linear-gradient(45deg, #d64701, #fc8729);
+    box-shadow: 0 0 1px 0 #000;
 }
 
 #animationControls.control-selected #fadeInOutDemoImagePlaceholder,
@@ -648,6 +649,7 @@ body {
 
 #effectsControls.effects-control-selected, #effectsControls:hover {
     background: linear-gradient(45deg, #d64701, #fc8729);
+    box-shadow: 0 0 1px 0 #000;
 }
 
 #effectsBtnPreviewImg {
