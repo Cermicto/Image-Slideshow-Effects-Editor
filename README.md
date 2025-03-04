@@ -1,6 +1,11 @@
 # Image-Slideshow-Effects-Editor v0.0.4.1
 An image slideshow and effects editor where you can apply various animations and special effects
 
+Hosted at: https://powerfulillusion.com/Image-Slideshow-Effects-Editor/
+
+_Instructions for controlling current image number, image display duration, and transition animation duration:_ 
+- Click on the image to show/hide controls.
+  
 ## Purpose of this Project
 Instead of building an entire project before pushing it to GitHub this project is aimed at examining the building iterations of the entire project itself. So each commit for each smaller portion of code additions and changes is recorded for examination of how I work through a project.
 
