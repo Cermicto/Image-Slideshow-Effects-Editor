@@ -1,4 +1,4 @@
-# Image-Slideshow-Effects-Editor v0.0.4.1
+# Image-Slideshow-Effects-Editor v0.0.4.2
 An image slideshow and effects editor where you can apply various animations and special effects
 
 Hosted at: https://powerfulillusion.com/Image-Slideshow-Effects-Editor/
@@ -30,6 +30,8 @@ Here I'll provide updates on where the project is, what I want to do with it, an
 - I'd like to integrate generative AI image collection generation through AI APIs
 
 #### Versions
+###### v0.0.4.2 Patch
+- Changed control buttons for image number and durations to include hover transitions and font icons instead of keyboard keys
 ###### v0.0.4.1 Patch
 - Fixed so image number and speed controls toggle on tap of the image instead of just over it all the time
 ###### v0.0.4.0 Feature Addition
