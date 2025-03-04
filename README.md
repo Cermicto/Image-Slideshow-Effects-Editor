@@ -8,16 +8,14 @@ Instead of building an entire project before pushing it to GitHub this project i
 Here I'll provide updates on where the project is, what I want to do with it, and other fixes and the like.
 
 ### Current State
-2/21/2025 ~10:50PM CST:
-- Got the image slideshow up and running with an initial fade in and out animation of the current and next frames.
-- Set up basic JavaScript to keep track of current images and transition to next slide based on direction (currently set to "previous" so it goes from the first to the last then the keeps going backwards right now)
+3/3/2025 ~10:50PM CST:
+- As of today v0.0.3.1 includes 5 animated transition selections and 3 image effect options
+- Set up basic JavaScript to keep track of current images and transition to next slide based on directional controls
 
 ### To-Dos (lots)
-- Add animation controls UI to select animation type, duration, timing, etc.
-- Add effect controls UI to change the look of the image and other things pertaining to the image
 - Add a bunch of different animations and effects
 - Make pause, next, and previous button controls for user control of the current image (so take it out of slideshow mode)
-- Add UI controls for adjusting levels and speeds; probably after adding simpler input boxes, UI preview inputs for animation and effect selection
+- Add UI controls for adjusting levels and speeds
 - Refactor code (always in progress)
 
 ### Future Integrations
@@ -26,13 +24,13 @@ Here I'll provide updates on where the project is, what I want to do with it, an
 - I'd like to integrate generative AI image collection generation through AI APIs
 
 #### Versions
-##### v0.0.3.0
+###### v0.0.3.1 Patch
+- Fixed Effects selection positioning in portrait mode
+##### v0.0.3.0 Feature Addition
 - Added image effects selections feature: Grayscale, sepia, and invert.
- ###### v0.0.3.1 Patch
- - Fixed Effects selection positioning in portrait mode
-##### v0.0.2.0
+##### v0.0.2.0 Feature Addition
 - Added slideshow transition animation selections feature: Fade in/out, slide right, slide left, slide down, and slide up.
-##### v0.0.1.0
+##### v0.0.1.0 Feature Addition
 - Added controls for slideshow direction: Forwards or Backwards
 ##### v0.0.0.0
 - Initial functioning slideshow
