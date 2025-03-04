@@ -1,4 +1,4 @@
-# Image-Slideshow-Effects-Editor v0.0.3.1
+# Image-Slideshow-Effects-Editor v0.0.4.0
 An image slideshow and effects editor where you can apply various animations and special effects
 
 ## Purpose of this Project
@@ -24,6 +24,8 @@ Here I'll provide updates on where the project is, what I want to do with it, an
 - I'd like to integrate generative AI image collection generation through AI APIs
 
 #### Versions
+###### v0.0.4.0 Feature Addition
+- Added image number controls and speed controls for image and transition animation duration
 ###### v0.0.3.1 Patch
 - Fixed Effects selection positioning in portrait mode
 ##### v0.0.3.0 Feature Addition
