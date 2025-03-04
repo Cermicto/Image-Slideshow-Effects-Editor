@@ -27,14 +27,30 @@ animationTimingFunction = 'ease-in-out'
 currentImage = 0
 animationTimerMax = 5
 timerUntilAnimation = animationTimerMax
+stillTheAnimation = slideAnimationTiming
+
+// Set array of images to images array
+images = d.gebc('slideshow-image')
+totalImages = images.length
 
 // Effects variables
 mainEffectName = null
 effectIsActive = false
 
-// Set array of images to images array
-images = d.gebc('slideshow-image')
-totalImages = images.length
+// Slideshow info, slide number, and speed control variables
+currentImageNumber = d.gebi('currentImageNumber')
+totalImagesNumber = d.gebi('totalImagesNumber')
+currentImageDuration = d.gebi('currentImageDuration')
+currentAnimationDuration = d.gebi('currentAnimationDuration')
+
+// Initialize base image number, total images number, and speed numbers
+
+currentImageNumber.innerText = (currentImage + 1).toString()
+totalImagesNumber.innerText = totalImages.toString()
+currentImageDuration.innerText = slideAnimationTiming.toString()
+currentAnimationDuration.innerText = animationDuration.toString()
+
+
 
 // Add IDs to images and mouse events
 for (var i = 0; i < images.length; i++) {
@@ -83,7 +99,7 @@ w.si(function() {
 
 // Set interval to check if animation timer has reached 0 or less
 w.si(function() {
-    if (timerUntilAnimation == 0) {
+    if ((timerUntilAnimation + stillTheAnimation) == 0) {
         triggerAnimation()
         resetTimerUntilAnimation()
 
@@ -100,6 +116,8 @@ w.si(function() {
                 currentImage--
             }
         }
+
+        currentImageNumber.innerText = (currentImage + 1).toString()
 
         setImageFrameSize(currentImage)
     }
@@ -129,7 +147,6 @@ function triggerAnimation () {
         }
     }
 
-
 	imageOut.classList.add(animations[currentSlideImageAnimationOut].animationClass)
 	imageOut.style.animationDuration = animationDuration + 's'
 	imageOut.style.animationTimingFunction = animationTimingFunction
@@ -140,16 +157,27 @@ function triggerAnimation () {
     imageOut.style.animationFillMode = animationFillMode
     imageOut.style.animationTimingFunction = animationTimingFunction
 
+    if (imageOut.classList.contains('set-above')) {
+    	imageOut.classList.remove('set-above')
+    }
+
+    if (imageOut.classList.contains('hidden')) {
+    	imageOut.classList.remove('hidden')
+    }
+
 
     if (effectIsActive) {
     	imageIn.classList.add(`${mainEffectName}100`)
+    }
+
+    if (imageIn.classList.contains('hidden')) {
+    	imageIn.classList.remove('hidden')
     }
 
     imageIn.classList.add(animations[nextSlideImageAnimationIn].animationClass)
     imageIn.style.animationDuration = animationDuration + 's'
     imageIn.style.animationFillMode = animationFillMode
     imageIn.style.animationTimingFunction = animationTimingFunction
-    imageIn.classList.remove('hidden')
 
     window.st(function() {
         imageOut.className = 'slideshow-image hidden'
@@ -323,7 +351,6 @@ for (var i = 0; i < effectPreviewBtns.length; i++) {
 imageFrame = d.gebi('imageFrame')
 
 imageFrame.onclick = function () {
-	console.log('imageFrame clicked...')
 	var slideAnimationsPullout = d.gebi('slideAnimations')
 	var animationControls = d.gebi('animationControls')
 	var effectSelectionsPullout = d.gebi('slideEffects')
@@ -338,4 +365,90 @@ imageFrame.onclick = function () {
 		effectSelectionsPullout.classList.remove('effects-selection-open')
 		effectsControls.classList.remove('effects-control-selected')
 	}
+}
+
+// Slide info and controls
+
+// Initialize current image number
+updateCurrentNumber()
+
+function updateCurrentNumber () {
+	currentImageNumber.innerText = (currentImage + 1).toString()
+}
+
+// Initialize total images number
+updateTotalImagesNumber()
+
+function updateTotalImagesNumber () {
+	totalImagesNumber.innerText = images.length.toString()
+}
+
+// Update image duration
+decreaseImageDurationBtn = d.gebi('decreaseImageDurationBtn')
+increaseImageDurationBtn = d.gebi('increaseImageDurationBtn')
+
+decreaseImageDurationBtn.onclick = function () {
+	if (animationTimerMax > animationDuration + 1) {
+		animationTimerMax--
+		stillTheAnimation = animationTimerMax - 1
+		resetTimerUntilAnimation()
+		currentImageDuration.innerText = animationTimerMax.toString()
+	}
+}
+
+increaseImageDurationBtn.onclick = function () {
+	animationTimerMax++
+	stillTheAnimation = animationTimerMax - 1
+	resetTimerUntilAnimation()
+	currentImageDuration.innerText = animationTimerMax.toString()
+}
+
+// Update animation duration
+decreaseAnimationDurationBtn = d.gebi('decreaseAnimationDurationBtn')
+increaseAnimationDurationBtn = d.gebi('increaseAnimationDurationBtn')
+
+decreaseAnimationDurationBtn.onclick = function () {
+	if (animationDuration > 1) {
+		animationDuration--
+		currentAnimationDuration.innerText = animationDuration.toString()
+	}
+}
+
+increaseAnimationDurationBtn.onclick = function () {
+	if (animationDuration < animationTimerMax - 1) {
+		animationDuration++
+		currentAnimationDuration.innerText = animationDuration.toString()
+	}
+}
+
+// Update image number
+
+goToNextImageBtn = d.gebi('goToNextImageBtn')
+goToPreviousImageBtn = d.gebi('goToPreviousImageBtn')
+
+goToNextImageBtn.onclick = function () {
+	d.gebi(`image${currentImage}`).classList.add('hidden')
+
+	if (currentImage + 1 == images.length) {
+		currentImage = 0
+	} else {
+		currentImage++
+	}
+
+	currentImageNumber.innerText = (currentImage + 1).toString()
+
+	d.gebi(`image${currentImage}`).classList.remove('hidden')
+}
+
+goToPreviousImageBtn.onclick = function () {
+	d.gebi(`image${currentImage}`).classList.add('hidden')
+	if (currentImage == 0) {
+		currentImage = images.length -1
+	} else {
+		currentImage--
+	}
+
+	currentImageNumber.innerText = (currentImage + 1).toString()
+
+	d.gebi(`image${currentImage}`).classList.remove('hidden')
 }

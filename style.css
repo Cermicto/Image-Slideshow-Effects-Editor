@@ -729,3 +729,79 @@ body {
 .invert100 {
 	filter: invert(100%);
 }
+
+/* Info and Speed Controls */
+
+#infoAndSpeedControls {
+    position: absolute;
+    z-index: 99;
+    background: linear-gradient(45deg, #351a0c8a, #121012b3);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid orange;
+    box-shadow: 0 0 30px 0 #000;
+    right: 30px;
+    top: 30px;
+    color: white;
+    font-family: 'Oxygen', sans-serif;
+    font-size: 15px;
+}
+
+.flex-info-controls-container {
+    display: flex;
+    letter-spacing: 1px;
+}
+
+.flex-info-row {
+    height: 25px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    text-align: right;
+    line-height: 25px;
+}
+
+.flex-info-row:last-child {
+	margin-bottom: 0px;
+}
+
+.flex-control-row {
+    text-align: center;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    line-height: 25px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+}
+
+.flex-control-row:last-child {
+	margin-bottom: 0px;
+}
+
+.slide-control-number {
+    line-height: 25px;
+}
+
+.info-control-button {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+#countBox {
+    min-width: 100px;
+}
+
+#decreaseImageDurationBtn,
+#decreaseAnimationDurationBtn {
+    margin-right: 10px;
+}
+
+#increaseImageDurationBtn,
+#increaseAnimationDurationBtn {
+    margin-left: 10px;
+}
+
+.set-above {
+	z-index: 999;
+}

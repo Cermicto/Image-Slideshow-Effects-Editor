@@ -240,5 +240,49 @@
 		<img class="slideshow-image hidden" src="images/robot-alien-131.jpg">
 		<img class="slideshow-image hidden" src="images/robot-alien-132.jpg">
 	</div>
+
+	<div id="infoAndSpeedControls" class="info-and-speed-controls-open">
+		<div class="flex-info-controls-container">
+			<div class="flex-info-column">
+				<div class="flex-info-row">Image Number:</div>
+				<div class="flex-info-row">Image Duration:</div>
+				<div class="flex-info-row">Animation Duration:</div>
+			</div>
+
+			<div class="flex-controls-column">
+				<div class="flex-control-row">
+					<button id="goToPreviousImageBtn" class="info-control-button left-hand-control-button">
+						<
+					</button>
+					<div id="countBox">
+						<span type="number" id="currentImageNumber" class="slide-control-number" name="currentImageNumber"></span>
+							/
+						<span id="totalImagesNumber"></span>
+					</div>
+					<button id="goToNextImageBtn" class="info-control-button right-hand-control-button">
+						>
+					</button>
+				</div>
+				<div class="flex-control-row">
+					<button id="decreaseImageDurationBtn" class="info-control-button left-hand-control-button">
+						v
+					</button>
+					<span type="number" id="currentImageDuration" class="slide-control-number" name="currentImageDuration"></span>&nbsp;seconds
+					<button id="increaseImageDurationBtn" class="info-control-button right-hand-control-button">
+						^
+					</button>
+				</div>
+				<div class="flex-control-row">
+					<button id="decreaseAnimationDurationBtn" class="info-control-button left-hand-control-button">
+						v
+					</button>
+					<span type="number" id="currentAnimationDuration" class="slide-control-number" name="currentAnimationDuration"></span>&nbsp;seconds
+					<button id="increaseAnimationDurationBtn" class="info-control-button right-hand-control-button">
+						^
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
