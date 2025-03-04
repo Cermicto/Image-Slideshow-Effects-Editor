@@ -8,8 +8,9 @@ Instead of building an entire project before pushing it to GitHub this project i
 Here I'll provide updates on where the project is, what I want to do with it, and other fixes and the like.
 
 ### Current State
-3/3/2025 ~10:50PM CST:
-- As of today v0.0.3.1 includes 5 animated transition selections and 3 image effect options
+3/3/2025 ~8:50PM CST:
+- As of today v0.0.4.1 includes 5 animated transition selections and 3 image effect options
+- Tap/click on image brings up image number and speed controls for image time visible and transition animation duration
 - Set up basic JavaScript to keep track of current images and transition to next slide based on directional controls
 
 ### To-Dos (lots)
