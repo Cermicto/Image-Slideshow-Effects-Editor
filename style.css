@@ -745,6 +745,12 @@ body {
     color: white;
     font-family: 'Oxygen', sans-serif;
     font-size: 15px;
+    transform: scale(0,0);
+    transition: all 0.25s ease-in-out;
+}
+
+#infoAndSpeedControls.info-and-speed-controls-open {
+	transform: scale(1,1);
 }
 
 .flex-info-controls-container {

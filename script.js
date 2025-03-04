@@ -37,6 +37,10 @@ totalImages = images.length
 mainEffectName = null
 effectIsActive = false
 
+// Slideshow play direction controls
+playSlideshowBackwardsBtn = d.gebi('playSlideshowBackwardsBtn')
+playSlideshowForwardsBtn = d.gebi('playSlideshowForwardsBtn')
+
 // Slideshow info, slide number, and speed control variables
 currentImageNumber = d.gebi('currentImageNumber')
 totalImagesNumber = d.gebi('totalImagesNumber')
@@ -44,22 +48,33 @@ currentImageDuration = d.gebi('currentImageDuration')
 currentAnimationDuration = d.gebi('currentAnimationDuration')
 
 // Initialize base image number, total images number, and speed numbers
-
 currentImageNumber.innerText = (currentImage + 1).toString()
 totalImagesNumber.innerText = totalImages.toString()
 currentImageDuration.innerText = slideAnimationTiming.toString()
 currentAnimationDuration.innerText = animationDuration.toString()
 
+// Select elements to update upon changing images, times visible, and duration
+goToNextImageBtn = d.gebi('goToNextImageBtn')
+goToPreviousImageBtn = d.gebi('goToPreviousImageBtn')
+decreaseImageDurationBtn = d.gebi('decreaseImageDurationBtn')
+increaseImageDurationBtn = d.gebi('increaseImageDurationBtn')
+decreaseAnimationDurationBtn = d.gebi('decreaseAnimationDurationBtn')
+increaseAnimationDurationBtn = d.gebi('increaseAnimationDurationBtn')
 
+// Planned usage once 3D transforms are added
+imageTransitionContext = '2d'
+imageFrame = d.gebi('imageFrame')
 
-// Add IDs to images and mouse events
+// Initialize controls position on load
+setLayout()
+
+// Add IDs to images
 for (var i = 0; i < images.length; i++) {
     images[i].id = `image${i}`
 }
 
 // Create animations object for referencing classes containing animations
 animations = {
-
 	'fadeIn': {
 		animationClass: 'fade-in'
 	},
@@ -184,9 +199,7 @@ function triggerAnimation () {
     }, animationDuration * 1000)
 }
 
-// Slideshow play direction controls
-playSlideshowBackwardsBtn = d.gebi('playSlideshowBackwardsBtn')
-
+// Slideshow directional control functions
 playSlideshowBackwardsBtn.onclick = function(e) {
     if (slideAnimationDirection != 'previous') {
         d.gebc('direction-btn-selected')[0].classList.remove('direction-btn-selected')
@@ -195,8 +208,6 @@ playSlideshowBackwardsBtn.onclick = function(e) {
         d.gebi('playDirectionMsg').innerText = 'Backwards'
     }
 }
-
-playSlideshowForwardsBtn = d.gebi('playSlideshowForwardsBtn')
 
 playSlideshowForwardsBtn.onclick = function(e) {
     if (slideAnimationDirection != 'next') {
@@ -209,10 +220,6 @@ playSlideshowForwardsBtn.onclick = function(e) {
 }
 
 // Adjust slideshow and controls positioning on window resize
-
-// Initialize controls on load
-setLayout()
-
 function setLayout () {
     if (getLowestDimension() == 'vh') {
         b.className = 'landscape'
@@ -245,9 +252,6 @@ w.onresize = setLayout
 	each other as well. Always a new way to do something! I loved the challenge on Codepen around
 	a decade ago that was asking people all the different ways to make a blue box.... hundreds...
 */
-
-imageTransitionContext = '2d'
-imageFrame = d.gebi('imageFrame')
 
 function setImageFrameZIndex () {
     if(imageTransitionContext == '2d') {
@@ -365,6 +369,12 @@ imageFrame.onclick = function () {
 		effectSelectionsPullout.classList.remove('effects-selection-open')
 		effectsControls.classList.remove('effects-control-selected')
 	}
+
+	if (infoAndSpeedControls.classList.contains('info-and-speed-controls-open')) {
+		infoAndSpeedControls.classList.remove('info-and-speed-controls-open')
+	} else {
+		infoAndSpeedControls.classList.add('info-and-speed-controls-open')
+	}
 }
 
 // Slide info and controls
@@ -384,9 +394,6 @@ function updateTotalImagesNumber () {
 }
 
 // Update image duration
-decreaseImageDurationBtn = d.gebi('decreaseImageDurationBtn')
-increaseImageDurationBtn = d.gebi('increaseImageDurationBtn')
-
 decreaseImageDurationBtn.onclick = function () {
 	if (animationTimerMax > animationDuration + 1) {
 		animationTimerMax--
@@ -404,9 +411,6 @@ increaseImageDurationBtn.onclick = function () {
 }
 
 // Update animation duration
-decreaseAnimationDurationBtn = d.gebi('decreaseAnimationDurationBtn')
-increaseAnimationDurationBtn = d.gebi('increaseAnimationDurationBtn')
-
 decreaseAnimationDurationBtn.onclick = function () {
 	if (animationDuration > 1) {
 		animationDuration--
@@ -422,10 +426,6 @@ increaseAnimationDurationBtn.onclick = function () {
 }
 
 // Update image number
-
-goToNextImageBtn = d.gebi('goToNextImageBtn')
-goToPreviousImageBtn = d.gebi('goToPreviousImageBtn')
-
 goToNextImageBtn.onclick = function () {
 	d.gebi(`image${currentImage}`).classList.add('hidden')
 
